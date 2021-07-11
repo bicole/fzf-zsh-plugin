@@ -38,5 +38,6 @@ fzf-brew-cask-install() {
         fi
     fi
 }
+
 # shellcheck disable=SC2068
-fzf-brew-install $@
+fzf-brew-cask-install $@

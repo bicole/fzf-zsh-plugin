@@ -142,3 +142,13 @@ function cdf() {
 # Cleanup internal functions
 unset -f debugOut
 unset -f has
+
+if (( ${+ZPWR_VERBS} )); then
+    ZPWR_VERBS[chromehistory]='chrome-history=bookmarks into fzf'
+    ZPWR_VERBS[chromebookmarks]='chrome-bookmark-browser=history into fzf'
+    ZPWR_VERBS[brewinstall]='fzf-brew-install=brew install into fzf'
+    ZPWR_VERBS[brewuninstall]='fzf-brew-uninstall=brew uninstall into fzf'
+    ZPWR_VERBS[brewcaskinstall]='fzf-brew-cask-install=brew install --cask into fzf'
+    ZPWR_VERBS[brewcaskuninstall]='fzf-brew-cask-uninstall=brew uninstall --cask into fzf'
+    ZPWR_VERBS[brewupdate]='fzf-brew-update=brew update into fzf'
+fi
