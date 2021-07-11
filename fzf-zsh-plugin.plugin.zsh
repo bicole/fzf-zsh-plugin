@@ -43,14 +43,14 @@ fi
 
 # Install some default settings if user doesn't already have fzf
 # settings configured.
-if [[ ! -f ~/.fzf.zsh ]]; then
-  cp "$(dirname $0)/fzf-settings.zsh" ~/.fzf.zsh
-fi
+#if [[ ! -f ~/.fzf.zsh ]]; then
+  #cp "$(dirname $0)/fzf-settings.zsh" ~/.fzf.zsh
+#fi
 
 
 # Source this before we start examining things so we can override the
 # defaults cleanly.
-[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
+#[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 
 # Reasonable defaults. Exclude .git directory and the node_modules cesspit.
 FZF_DEFAULT_COMMAND='find . -type f ( -path .git -o -path node_modules ) -prune'
