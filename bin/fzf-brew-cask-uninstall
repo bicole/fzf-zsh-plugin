@@ -25,7 +25,7 @@ fi
 # and display a info quickview window for the currently marked application
 fzf-brew-cask-uninstall() {
     local token
-    token=$(brew cask list | fzf-tmux --query="$1" +m --preview 'brew cask info {}')
+    token=$(brew list --cask | fzf-tmux --query="$1" +m --preview 'brew info --cask {}')
 
     if [ "x$token" != "x" ]
     then
