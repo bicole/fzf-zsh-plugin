@@ -25,16 +25,18 @@ function has() {
 
 # browse Chrome history
 chrome-history() {
-  local cols sep
+  local cols sep temp=/tmp/h$$
   cols=$(( COLUMNS / 3 ))
   sep='{::}'
 
-  cp -f "$chrome_history" /tmp/h
-  sqlite3 -separator $sep /tmp/h \
+  cp -f "$chrome_history" $temp
+  sqlite3 -separator $sep $temp \
     "select substr(title, 1, $cols), url
      from urls order by last_visit_time desc" |
   awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
   fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | xargs "$open" > /dev/null 2> /dev/null
+
+     rm -f $temp
 }
 
 if [ "$(uname)" = "Darwin" ]; then
