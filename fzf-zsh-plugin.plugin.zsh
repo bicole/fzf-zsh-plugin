@@ -35,11 +35,11 @@ function debugOut() {
 # file searching.
 
 # Install fzf into ~ if it hasn't already been installed.
-if ! has fzf; then
-  if [[ ! -d ~/.fzf ]]; then
-    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-  fi
-fi
+#if ! has fzf; then
+  #if [[ ! -d ~/.fzf ]]; then
+    #git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  #fi
+#fi
 
 # Install some default settings if user doesn't already have fzf
 # settings configured.
