@@ -1,7 +1,6 @@
 # Copyright 2020-2021 Joseph Block <jpb@unixorn.net>
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
@@ -146,9 +145,11 @@ unset -f has
 if (( ${+ZPWR_VERBS} )); then
     ZPWR_VERBS[chromehistory]='chrome-history=bookmarks into fzf'
     ZPWR_VERBS[chromebookmarks]='chrome-bookmark-browser=history into fzf'
-    ZPWR_VERBS[brewinstall]='fzf-brew-install=brew install into fzf'
-    ZPWR_VERBS[brewuninstall]='fzf-brew-uninstall=brew uninstall into fzf'
-    ZPWR_VERBS[brewcaskinstall]='fzf-brew-cask-install=brew install --cask into fzf'
-    ZPWR_VERBS[brewcaskuninstall]='fzf-brew-cask-uninstall=brew uninstall --cask into fzf'
-    ZPWR_VERBS[brewupdate]='fzf-brew-update=brew update into fzf'
+    if (( ${+commands[brew]} )); then
+        ZPWR_VERBS[brewinstall]='fzf-brew-install=brew install into fzf'
+        ZPWR_VERBS[brewuninstall]='fzf-brew-uninstall=brew uninstall into fzf'
+        ZPWR_VERBS[brewcaskinstall]='fzf-brew-cask-install=brew install --cask into fzf'
+        ZPWR_VERBS[brewcaskuninstall]='fzf-brew-cask-uninstall=brew uninstall --cask into fzf'
+        ZPWR_VERBS[brewupdate]='fzf-brew-update=brew update into fzf'
+    fi
 fi
