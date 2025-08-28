@@ -49,6 +49,7 @@ fi
 unset xdg_path
 
 # Install fzf into ~ if it hasn't already been installed.
+# Commented out in mt
 if ! _fzf_has fzf; then
   if [[ ! -d $FZF_PATH ]]; then
     git clone --depth 1 https://github.com/junegunn/fzf.git $FZF_PATH
@@ -58,6 +59,7 @@ fi
 
 # Install some default settings if user doesn't already have fzf
 # settings configured.
+# Commented out in mt
 _fzf_debugOut "fzf_conf: $fzf_conf"
 if [[ ! -f $fzf_conf ]]; then
   echo "Can't find a fzf configuration file at $fzf_conf, creating a default one"
@@ -66,6 +68,7 @@ fi
 
 # Source this before we start examining things so we can override the
 # defaults cleanly.
+# Commented out in mt
 [[ -f $fzf_conf ]] && source $fzf_conf
 unset fzf_conf
 
@@ -170,10 +173,11 @@ if [[ -d $FZF_PATH/man ]]; then
 fi
 
 if _fzf_has z && ! _fzf_has zoxide; then
-  unalias z 2> /dev/null
+  unalias z 2> /dev/null # Commented out in mt
   _fzf_z="_z"
   (( ${+functions[zshz]} )) && { _fzf_z="zshz"; compdef _zshz z; }
   # like normal z when used with arguments but displays an fzf prompt when used without.
+  # Changed to zz in mt
   function z() {
     [ $# -gt 0 ] && $_fzf_z "$*" && return
     cd "$($_fzf_z -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
@@ -205,3 +209,15 @@ fi
 unset -f _fzf_debugOut
 unset -f _fzf_has
 unset -f _fzf_preview
+
+if (( ${+ZPWR_VERBS} )); then
+    ZPWR_VERBS[chromehistory]='chrome-history=bookmarks into fzf'
+    ZPWR_VERBS[chromebookmarks]='chrome-bookmark-browser=history into fzf'
+    if (( ${+commands[brew]} )); then
+        ZPWR_VERBS[brewinstall]='fzf-brew-install=brew install into fzf'
+        ZPWR_VERBS[brewuninstall]='fzf-brew-uninstall=brew uninstall into fzf'
+        ZPWR_VERBS[brewcaskinstall]='fzf-brew-cask-install=brew install --cask into fzf'
+        ZPWR_VERBS[brewcaskuninstall]='fzf-brew-cask-uninstall=brew uninstall --cask into fzf'
+        ZPWR_VERBS[brewupdate]='fzf-brew-update=brew update into fzf'
+    fi
+fi

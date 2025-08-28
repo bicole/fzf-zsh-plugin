@@ -33,7 +33,7 @@ b() {
 
     jq -r "$jq_script" < "$bookmarks_path" \
         | sed -E $'s/(.*)\t(.*)/\\1\t\x1b[36m\\2\x1b[m/g' \
-        | fzf --ansi \
+        | fzf --ansi -m \
         | cut -d$'\t' -f2 \
         | xargs open
 }
